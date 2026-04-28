@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Luna's</title>
+  <title>Order Luna's</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <style>
@@ -11,18 +11,30 @@
       background: #f5f5f5;
     }
 
-    .header {
-      background: white;
-      padding: 15px;
-      font-size: 20px;
-      font-weight: bold;
-      text-align: center;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.08);
-      position: sticky;
-      top: 0;
-      z-index: 10;
-    }
 
+
+.header {
+  background: white;
+  padding: 12px 15px;
+  font-size: 20px;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+/* LOGO */
+.logo {
+  width: 64px;
+  height: 64px;
+  object-fit: cover;
+  border-radius: 32px; /* makes it look nicer */
+}
     .subtitle {
       text-align: center;
       color: #777;
@@ -33,7 +45,7 @@
       position: fixed;
       top: 12px;
       right: 12px;
-      background: #ff6b00;
+      background: #275538;
       color: white;
       padding: 8px 12px;
       border-radius: 20px;
@@ -74,14 +86,26 @@
       font-size: 15px;
     }
 
+    .name-mango {
+      font-weight: bold;
+      font-size: 15px;
+	  color: #FFA62B;
+    }
+
+    .name-coffee {
+      font-weight: bold;
+      font-size: 15px;
+	  color: #6F4E37;
+    }
+
     .desc {
       font-size: 12px;
       color: gray;
     }
 
     .add-btn {
-      border: 1px solid #ff6b00;
-      color: #ff6b00;
+      border: 2px solid #275538;
+      color: #275538;
       padding: 6px 14px;
       border-radius: 6px;
       font-weight: bold;
@@ -99,7 +123,7 @@
       width: 28px;
       height: 28px;
       border: none;
-      background: #ff6b00;
+      background: #275538;
       color: white;
       font-size: 16px;
       border-radius: 6px;
@@ -113,7 +137,24 @@
       border-radius: 12px;
     }
 
-    input, textarea, select {
+    .message-section {
+      background: white;
+      padding: 15px;
+      margin-top: 10px;
+      border-radius: 12px;
+	  font-size: 12px
+    }
+
+    input, textarea {
+      width: 95%;
+      padding: 10px;
+      margin-top: 8px;
+      margin-bottom: 12px;
+      border-radius: 8px;
+      border: 1px solid #ddd;
+    }
+
+    select {
       width: 100%;
       padding: 10px;
       margin-top: 8px;
@@ -143,10 +184,23 @@
 
 <body>
 
-<div class="header">🍮 Luna's</div>
-<p class="subtitle">Freshly made. Delivered with love.</p>
+<!-- <div class="header">🍮 Luna's</div> -->
+<div class="header">
+  <img src="./lunaslogo.jpg" class="logo">
+  <!-- <span>Luna's</span> -->
+</div>
+<p class="subtitle">Mabuhay! Welcome sa Luna's</p>
 
 <div class="floating-cart" id="cartBar">🛒 0</div>
+
+<div class="message-section">
+  <p>Every item is lovingly made in limited batches to preserve its natural freshness and ensure premium quality, free from artificial preservatives. After receiving your order, we will contact you via WhatsApp or email with availability and payment details to confirm the order.</p>
+  <p>Delivery is FREE for the <b>1st Order</b> in our coverage area (<b>Kalyani Nagar</b>, <b>Koregaon Park</b>, <b>Viman Nagar</b> and <b>Yerwada</b>). Delivery fee of <b>₹35</b> is applicable thereafter.</p>
+  <p>Deliveries outside our coverage area are subject to feasibility and will have additional delivery charges, which will be confirmed based on your location.</p>
+  <p>Orders will be <b>delivered the next day</b> during chosen time slot. Please ensure your availability during the chosen time slot for a smooth delivery experience.</p>
+  <p>We also accept bulk orders for businesses and events, please contact us via WhatsApp for details.</p>
+  <p>If you have any queries please feel free to contact us and we will be happy to help you -<br><b>WhatsApp</b>: (+91)9604320903<br><b>Instagram</b>: @thelunaslab</p>
+</div>
 
 <div class="container">
 
@@ -156,8 +210,8 @@
 
 <div class="card">
   <div class="info">
-    <div class="name">Mango Float Grande</div>
-    <div class="product-qty-price">400ml • ₹450</div>
+    <div class="name-mango">Mango Float Grande <span class="product-qty-price">(400ml)</span></div>
+    <div class="name">₹450</div>
   </div>
 
   <button type="button" class="add-btn" onclick="addItem('mango_grande', this)">ADD</button>
@@ -173,8 +227,8 @@
 
 <div class="card">
   <div class="info">
-    <div class="name">Mango Float Mini</div>
-    <div class="desc">250ml • ₹299</div>
+    <div class="name-mango">Mango Float Mini <span class="product-qty-price">(250ml)</span></div>
+    <div class="name">₹299</div>
   </div>
 
   <button type="button" class="add-btn" onclick="addItem('mango_mini', this)">ADD</button>
@@ -190,8 +244,8 @@
 
 <div class="card">
   <div class="info">
-    <div class="name">Coffee Crumble Grande</div>
-    <div class="desc">400ml • ₹350</div>
+    <div class="name-coffee">Coffee Crumble Grande <span class="product-qty-price">(400ml)</span></div>
+    <div class="name">₹350</div>
   </div>
 
   <button type="button" class="add-btn" onclick="addItem('coffee_grande', this)">ADD</button>
@@ -207,8 +261,8 @@
 
 <div class="card">
   <div class="info">
-    <div class="name">Coffee Crumble Mini</div>
-    <div class="desc">250ml • ₹250</div>
+    <div class="name-coffee">Coffee Crumble Mini <span class="product-qty-price">(250ml)</span></div>
+    <div class="name">₹250</div>
   </div>
 
   <button type="button" class="add-btn" onclick="addItem('coffee_mini', this)">ADD</button>
@@ -224,8 +278,8 @@
 
 <div class="card">
   <div class="info">
-    <div class="name">Coffee Jelly</div>
-    <div class="desc">300ml • ₹199</div>
+    <div class="name-coffee">Coffee Jelly <span class="product-qty-price">(300ml)</span></div>
+    <div class="name">₹199</div>
   </div>
 
   <button type="button" class="add-btn" onclick="addItem('coffee_jelly', this)">ADD</button>
@@ -244,18 +298,22 @@
 <div class="form-section">
   <h3>Customer Details</h3>
 
-  <input type="text" id="name" placeholder="Full Name" required>
+  <input type="text" id="name" placeholder="Name *" required>
 
-  <input type="tel" id="phone" placeholder="Phone Number" required>
+  <input type="tel" id="phone" placeholder="Mobile number *" required>
 
-  <textarea id="address" placeholder="Full Address" required></textarea>
+  <input type="text" id="address" placeholder="Delivery address *" required>
 
   <select id="timeslot" required>
-    <option value="">Select Time Slot</option>
+    <option value="">Select delivery slot *</option>
     <option>11 AM - 1 PM</option>
     <option>3 PM - 5 PM</option>
     <option>7 PM - 9 PM</option>
   </select>
+
+  <input type="email" id="email" placeholder="Email (optional)">
+
+  <input type="text" id="note" placeholder="Additional note (optional)">
 
   <button type="submit" class="submit" id="submitBtn" disabled>Place Order</button>
 </div>
