@@ -1,346 +1,591 @@
 <!DOCTYPE html>
 <html>
-   <head>
-      <title>Order Luna's</title>
-      <link rel="icon" type="image/png" href="./lunaslogo.jpg">
-      <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <style>
-         body {
-         margin: 0;
-         font-family: 'Segoe UI', sans-serif;
-         background: #f5f5f5;
-         }
-         .header {
-         background: white;
-         padding: 12px 15px;
-         font-size: 20px;
-         font-weight: bold;
-         display: flex;
-         align-items: center;
-         justify-content: center;
-         gap: 10px;
-         box-shadow: 0 2px 6px rgba(0,0,0,0.08);
-         position: sticky;
-         top: 0;
-         z-index: 10;
-         }
-         .logo {
-         width: 72px;
-         height: 72px;
-         object-fit: cover;
-         border-radius: 36px; /* makes it look nicer */
-         }
-         .subtitle {
-         text-align: center;
-         color: #777;
-         margin-bottom: 20px;
-         }
-         .floating-cart {
-         position: fixed;
-         top: 12px;
-         right: 12px;
-         background: #275538;
-         color: white;
-         padding: 8px 12px;
-         border-radius: 20px;
-         font-weight: bold;
-         box-shadow: 0 4px 10px rgba(0,0,0,0.15);
-         display: none;
-         z-index: 999;
-         font-size: 14px;
-         }
-         .container {
-         padding: 10px;
-         padding-bottom: 20px;
-         }
-         .card {
-         background: white;
-         border-radius: 12px;
-         padding: 12px;
-         margin-bottom: 12px;
-         display: flex;
-         justify-content: space-between;
-         align-items: center;
-         box-shadow: 0 3px 8px rgba(0,0,0,0.08);
-         }
-         .product-qty-price {
-         font-size: 13px;
-         color: #777;
-         }
-         .info {
-         max-width: 65%;
-         }
-         .name {
-         font-weight: 600;
-         font-size: 15px;
-         }
-         .name-mango {
-         font-weight: bold;
-         font-size: 15px;
-         color: #FFA62B;
-         }
-         .name-coffee {
-         font-weight: bold;
-         font-size: 15px;
-         color: #6F4E37;
-         }
-         .desc {
-         font-size: 12px;
-         color: gray;
-         }
-         .add-btn {
-         border: 2px solid #275538;
-         color: #275538;
-         padding: 6px 14px;
-         border-radius: 6px;
-         font-weight: bold;
-         background: white;
-         cursor: pointer;
-         }
-         .counter {
-         display: none;
-         align-items: center;
-         gap: 10px;
-         }
-         .counter button {
-         width: 28px;
-         height: 28px;
-         border: none;
-         background: #275538;
-         color: white;
-         font-size: 16px;
-         border-radius: 6px;
-         cursor: pointer;
-         }
-         .form-section {
-         background: white;
-         padding: 15px;
-         margin-top: 10px;
-         border-radius: 12px;
-         }
-         .message-section {
-         background: white;
-         padding: 15px;
-         margin-top: 10px;
-         border-radius: 12px;
-         font-size: 14px;
-         }
-         input, textarea {
-         width: 95%;
-         padding: 10px;
-         margin-top: 8px;
-         margin-bottom: 12px;
-         border-radius: 8px;
-         border: 1px solid #ddd;
-         }
-         select {
-         width: 100%;
-         padding: 10px;
-         margin-top: 8px;
-         margin-bottom: 12px;
-         border-radius: 8px;
-         border: 1px solid #ddd;
-         }
-         button.submit {
-         width: 100%;
-         padding: 12px;
-         border: none;
-         border-radius: 8px;
-         background: #28a745;
-         color: white;
-         font-size: 16px;
-         font-weight: bold;
-         cursor: pointer;
-         }
-         button.submit:disabled {
-         background: #ccc;
-         }
-      </style>
-   </head>
-   <body>
-      <div class="header">
-         <img src="./lunaslogo.jpg" class="logo">
+
+  <head>
+    <title>Order Luna's</title>
+    <link rel="icon" type="image/png" href="./lunaslogo.jpg">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+      body {
+        margin: 0;
+        font-family: 'Segoe UI', sans-serif;
+        background: #f5f5f5;
+      }
+
+      .header {
+        background: white;
+        padding: 12px 15px;
+        font-size: 20px;
+        font-weight: bold;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+        position: sticky;
+        top: 0;
+        z-index: 10;
+      }
+
+      .logo {
+        width: 72px;
+        height: 72px;
+        object-fit: cover;
+        border-radius: 36px;
+        /* makes it look nicer */
+      }
+
+      .subtitle {
+        text-align: center;
+        color: #777;
+        margin-bottom: 20px;
+      }
+
+      .floating-cart {
+        position: fixed;
+        top: 12px;
+        right: 12px;
+        background: #275538;
+        color: white;
+        padding: 8px 12px;
+        border-radius: 20px;
+        font-weight: bold;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+        display: none;
+        z-index: 999;
+        font-size: 14px;
+      }
+
+      .container {
+        padding: 10px;
+        padding-bottom: 20px;
+      }
+
+      .card {
+        background: white;
+        border-radius: 12px;
+        padding: 12px;
+        margin-bottom: 12px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        box-shadow: 0 3px 8px rgba(0, 0, 0, 0.08);
+      }
+
+      .product-qty-price {
+        font-size: 13px;
+        color: #777;
+      }
+
+      .info {
+        max-width: 65%;
+      }
+
+      .name {
+        font-weight: 600;
+        font-size: 15px;
+      }
+
+      .name-mango {
+        font-weight: bold;
+        font-size: 15px;
+        color: #FFA62B;
+      }
+
+      .name-coffee {
+        font-weight: bold;
+        font-size: 15px;
+        color: #6F4E37;
+      }
+
+      .desc {
+        font-size: 12px;
+        color: gray;
+      }
+
+      .add-btn {
+        border: 2px solid #275538;
+        color: #275538;
+        padding: 6px 14px;
+        border-radius: 6px;
+        font-weight: bold;
+        background: white;
+        cursor: pointer;
+      }
+
+      .counter {
+        display: none;
+        align-items: center;
+        gap: 10px;
+      }
+
+      .counter button {
+        width: 28px;
+        height: 28px;
+        border: none;
+        background: #275538;
+        color: white;
+        font-size: 16px;
+        border-radius: 6px;
+        cursor: pointer;
+      }
+
+      .form-section {
+        background: white;
+        padding: 15px;
+        margin-top: 10px;
+        border-radius: 12px;
+      }
+
+      .message-section {
+        background: white;
+        padding: 15px;
+        margin-top: 10px;
+        border-radius: 12px;
+        font-size: 14px;
+      }
+
+      input,
+      textarea {
+        width: 95%;
+        padding: 10px;
+        margin-top: 8px;
+        margin-bottom: 12px;
+        border-radius: 8px;
+        border: 1px solid #ddd;
+      }
+
+      select {
+        width: 100%;
+        padding: 10px;
+        margin-top: 8px;
+        margin-bottom: 12px;
+        border-radius: 8px;
+        border: 1px solid #ddd;
+      }
+
+      button.submit {
+        width: 100%;
+        padding: 12px;
+        border: none;
+        border-radius: 8px;
+        background: #28a745;
+        color: white;
+        font-size: 16px;
+        font-weight: bold;
+        cursor: pointer;
+      }
+
+      button.submit:disabled {
+        background: #ccc;
+      }
+
+      /* LOADING OVERLAY */
+      #loadingOverlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(255, 255, 255, 0.9);
+        display: none;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        z-index: 9999;
+      }
+
+      /* SPINNER */
+      .spinner {
+        width: 50px;
+        height: 50px;
+        border: 5px solid #eee;
+        border-top: 5px solid #28a745;
+        border-radius: 50%;
+        animation: spin 1s linear infinite;
+      }
+
+      @keyframes spin {
+        from {
+          transform: rotate(0deg);
+        }
+
+        to {
+          transform: rotate(360deg);
+        }
+      }
+
+      #loadingOverlay p {
+        margin-top: 15px;
+        font-weight: bold;
+        color: #333;
+      }
+
+      /* SUCCESS OVERLAY */
+      #successOverlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: white;
+        display: none;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        z-index: 10000;
+      }
+
+      /* CHECKMARK */
+      .success-checkmark {
+        width: 80px;
+        height: 115px;
+      }
+
+      .check-icon {
+        width: 80px;
+        height: 80px;
+        position: relative;
+        border-radius: 50%;
+        box-sizing: content-box;
+        border: 4px solid #28a745;
+      }
+
+      .check-icon::before,
+      .check-icon::after {
+        content: '';
+        height: 100px;
+        position: absolute;
+        background: white;
+        transform: rotate(-45deg);
+      }
+
+      .icon-line {
+        height: 5px;
+        background-color: #28a745;
+        display: block;
+        border-radius: 2px;
+        position: absolute;
+        z-index: 10;
+      }
+
+      .line-tip {
+        top: 46px;
+        left: 14px;
+        width: 25px;
+        transform: rotate(45deg);
+        animation: icon-line-tip 0.4s;
+      }
+
+      .line-long {
+        top: 38px;
+        right: 8px;
+        width: 47px;
+        transform: rotate(-45deg);
+        animation: icon-line-long 0.4s;
+      }
+
+      @keyframes icon-line-tip {
+        from {
+          width: 0;
+        }
+
+        to {
+          width: 25px;
+        }
+      }
+
+      @keyframes icon-line-long {
+        from {
+          width: 0;
+        }
+
+        to {
+          width: 47px;
+        }
+      }
+
+      #successOverlay p {
+        margin-top: 20px;
+        font-size: 18px;
+        font-weight: bold;
+        color: #28a745;
+      }
+
+      label {
+        display: block;
+        font-weight: 600;
+        font-size: 14px;
+        margin-top: 8px;
+      }
+
+      .required {
+        color: red;
+        margin-left: 3px;
+      }
+
+      .required-field {
+        color: red;
+        margin-left: 3px;
+        display: block;
+        font-weight: 600;
+        font-size: 14px;
+        margin-top: 8px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="header">
+      <img src="./lunaslogo.jpg" class="logo">
+    </div>
+    <p class="subtitle">Mabuhay! Welcome sa Luna's</p>
+    <div class="floating-cart" id="cartBar">🛒 0</div>
+    <div class="message-section">
+      <p>Every item is lovingly made in limited batches to preserve its natural freshness and ensure premium quality, free from artificial preservatives. After receiving your order, we will contact you via WhatsApp or email with availability and payment details to confirm the order.</p>
+      <p>Delivery is FREE for the <b>1st Order</b> in our coverage area (<b>Kalyani Nagar</b>, <b>Koregaon Park</b>, <b>Viman Nagar</b> and <b>Yerwada</b>). Delivery fee of <b>₹35</b> is applicable thereafter.</p>
+      <p>Deliveries outside our coverage area are subject to feasibility and will have additional delivery charges, which will be confirmed based on your location.</p>
+      <p>Orders will be <b>delivered the next day</b> during chosen time slot. Please ensure your availability during the chosen time slot for a smooth delivery experience.</p>
+      <p>We also accept bulk orders for businesses and events, please contact us via WhatsApp for details.</p>
+      <p>If you have any queries please feel free to contact us and we will be happy to help you -<br><b>WhatsApp</b>: <a href="https://wa.me/9604320903" target="_blank" rel="noopener noreferrer">(+91) 9604320903</a><br><b>Instagram</b>: <a href="https://www.instagram.com/thelunaslab" target="_blank" rel="noopener noreferrer">@thelunaslab</a></p>
+    </div>
+    <div class="container">
+      <form id="orderForm">
+        <!-- PRODUCTS -->
+        <div class="card">
+          <div class="info">
+            <div class="name-mango">Mango Float Grande <span class="product-qty-price">(400ml)</span></div>
+            <div class="name">₹450</div>
+          </div>
+          <button type="button" class="add-btn" onclick="addItem('mango_grande', this)">ADD</button>
+          <div class="counter" id="mango_grande_counter">
+            <button type="button" onclick="changeQty('mango_grande', -1)">-</button>
+            <span id="mango_grande_display">1</span>
+            <button type="button" onclick="changeQty('mango_grande', 1)">+</button>
+          </div>
+          <input type="hidden" id="mango_grande" value="0">
+        </div>
+        <div class="card">
+          <div class="info">
+            <div class="name-mango">Mango Float Mini <span class="product-qty-price">(250ml)</span></div>
+            <div class="name">₹299</div>
+          </div>
+          <button type="button" class="add-btn" onclick="addItem('mango_mini', this)">ADD</button>
+          <div class="counter" id="mango_mini_counter">
+            <button type="button" onclick="changeQty('mango_mini', -1)">-</button>
+            <span id="mango_mini_display">1</span>
+            <button type="button" onclick="changeQty('mango_mini', 1)">+</button>
+          </div>
+          <input type="hidden" id="mango_mini" value="0">
+        </div>
+        <div class="card">
+          <div class="info">
+            <div class="name-coffee">Coffee Crumble Grande <span class="product-qty-price">(400ml)</span></div>
+            <div class="name">₹350</div>
+          </div>
+          <button type="button" class="add-btn" onclick="addItem('coffee_grande', this)">ADD</button>
+          <div class="counter" id="coffee_grande_counter">
+            <button type="button" onclick="changeQty('coffee_grande', -1)">-</button>
+            <span id="coffee_grande_display">1</span>
+            <button type="button" onclick="changeQty('coffee_grande', 1)">+</button>
+          </div>
+          <input type="hidden" id="coffee_grande" value="0">
+        </div>
+        <div class="card">
+          <div class="info">
+            <div class="name-coffee">Coffee Crumble Mini <span class="product-qty-price">(250ml)</span></div>
+            <div class="name">₹250</div>
+          </div>
+          <button type="button" class="add-btn" onclick="addItem('coffee_mini', this)">ADD</button>
+          <div class="counter" id="coffee_mini_counter">
+            <button type="button" onclick="changeQty('coffee_mini', -1)">-</button>
+            <span id="coffee_mini_display">1</span>
+            <button type="button" onclick="changeQty('coffee_mini', 1)">+</button>
+          </div>
+          <input type="hidden" id="coffee_mini" value="0">
+        </div>
+        <div class="card">
+          <div class="info">
+            <div class="name-coffee">Coffee Jelly <span class="product-qty-price">(300ml)</span></div>
+            <div class="name">₹199</div>
+          </div>
+          <button type="button" class="add-btn" onclick="addItem('coffee_jelly', this)">ADD</button>
+          <div class="counter" id="coffee_jelly_counter">
+            <button type="button" onclick="changeQty('coffee_jelly', -1)">-</button>
+            <span id="coffee_jelly_display">1</span>
+            <button type="button" onclick="changeQty('coffee_jelly', 1)">+</button>
+          </div>
+          <input type="hidden" id="coffee_jelly" value="0">
+        </div>
+        <!-- CUSTOMER DETAILS -->
+        <div class="form-section">
+          <h3>Customer Details <span class="required-field">* Indicates required field</span></h3>
+          <label>
+            Name <span class="required">*</span>
+          </label>
+          <input type="text" id="customer_name" required>
+          <label>
+            Mobile Number <span class="required">*</span>
+          </label>
+          <input type="tel" id="phone" required pattern="[6-9]{1}[0-9]{9}" maxlength="10" title="Enter valid 10-digit mobile number">
+          <label>
+            Delivery Address <span class="required">*</span>
+          </label>
+          <span class="product-qty-price">Please provide full and accurate address to ensure proper and timely delivery.</span>
+          <input type="text" id="address" required>
+          <label>
+            Delivery Slot <span class="required">*</span>
+          </label>
+          <select id="timeslot" required>
+            <option value="">Select one</option>
+            <option>11 AM - 1 PM</option>
+            <option>3 PM - 5 PM</option>
+            <option>7 PM - 9 PM</option>
+          </select>
+          <label>Email</label>
+          <input type="email" id="email">
+          <label>Additional Note</label>
+          <input type="text" id="note">
+          <button type="submit" class="submit" id="submitBtn" disabled>Place Order</button>
+        </div>
+      </form>
+    </div>
+    <div id="loadingOverlay">
+      <div class="spinner"></div>
+      <p>Placing your order...</p>
+    </div>
+    <div id="successOverlay">
+      <div class="success-checkmark">
+        <div class="check-icon">
+          <span class="icon-line line-tip"></span>
+          <span class="icon-line line-long"></span>
+          <div class="icon-circle"></div>
+          <div class="icon-fix"></div>
+        </div>
       </div>
-      <p class="subtitle">Mabuhay! Welcome sa Luna's</p>
-      <div class="floating-cart" id="cartBar">🛒 0</div>
-      <div class="message-section">
-         <p>Every item is lovingly made in limited batches to preserve its natural freshness and ensure premium quality, free from artificial preservatives. After receiving your order, we will contact you via WhatsApp or email with availability and payment details to confirm the order.</p>
-         <p>Delivery is FREE for the <b>1st Order</b> in our coverage area (<b>Kalyani Nagar</b>, <b>Koregaon Park</b>, <b>Viman Nagar</b> and <b>Yerwada</b>). Delivery fee of <b>₹35</b> is applicable thereafter.</p>
-         <p>Deliveries outside our coverage area are subject to feasibility and will have additional delivery charges, which will be confirmed based on your location.</p>
-         <p>Orders will be <b>delivered the next day</b> during chosen time slot. Please ensure your availability during the chosen time slot for a smooth delivery experience.</p>
-         <p>We also accept bulk orders for businesses and events, please contact us via WhatsApp for details.</p>
-         <p>If you have any queries please feel free to contact us and we will be happy to help you -<br><b>WhatsApp</b>: <a href="https://wa.me/9604320903" target="_blank" rel="noopener noreferrer">(+91) 9604320903</a><br><b>Instagram</b>: <a href="https://www.instagram.com/thelunaslab" target="_blank" rel="noopener noreferrer">@thelunaslab</a></p>
-      </div>
-      <div class="container">
-         <form id="orderForm">
-            <!-- PRODUCTS -->
-            <div class="card">
-               <div class="info">
-                  <div class="name-mango">Mango Float Grande <span class="product-qty-price">(400ml)</span></div>
-                  <div class="name">₹450</div>
-               </div>
-               <button type="button" class="add-btn" onclick="addItem('mango_grande', this)">ADD</button>
-               <div class="counter" id="mango_grande_counter">
-                  <button type="button" onclick="changeQty('mango_grande', -1)">-</button>
-                  <span id="mango_grande_display">1</span>
-                  <button type="button" onclick="changeQty('mango_grande', 1)">+</button>
-               </div>
-               <input type="hidden" id="mango_grande" value="0">
-            </div>
-            <div class="card">
-               <div class="info">
-                  <div class="name-mango">Mango Float Mini <span class="product-qty-price">(250ml)</span></div>
-                  <div class="name">₹299</div>
-               </div>
-               <button type="button" class="add-btn" onclick="addItem('mango_mini', this)">ADD</button>
-               <div class="counter" id="mango_mini_counter">
-                  <button type="button" onclick="changeQty('mango_mini', -1)">-</button>
-                  <span id="mango_mini_display">1</span>
-                  <button type="button" onclick="changeQty('mango_mini', 1)">+</button>
-               </div>
-               <input type="hidden" id="mango_mini" value="0">
-            </div>
-            <div class="card">
-               <div class="info">
-                  <div class="name-coffee">Coffee Crumble Grande <span class="product-qty-price">(400ml)</span></div>
-                  <div class="name">₹350</div>
-               </div>
-               <button type="button" class="add-btn" onclick="addItem('coffee_grande', this)">ADD</button>
-               <div class="counter" id="coffee_grande_counter">
-                  <button type="button" onclick="changeQty('coffee_grande', -1)">-</button>
-                  <span id="coffee_grande_display">1</span>
-                  <button type="button" onclick="changeQty('coffee_grande', 1)">+</button>
-               </div>
-               <input type="hidden" id="coffee_grande" value="0">
-            </div>
-            <div class="card">
-               <div class="info">
-                  <div class="name-coffee">Coffee Crumble Mini <span class="product-qty-price">(250ml)</span></div>
-                  <div class="name">₹250</div>
-               </div>
-               <button type="button" class="add-btn" onclick="addItem('coffee_mini', this)">ADD</button>
-               <div class="counter" id="coffee_mini_counter">
-                  <button type="button" onclick="changeQty('coffee_mini', -1)">-</button>
-                  <span id="coffee_mini_display">1</span>
-                  <button type="button" onclick="changeQty('coffee_mini', 1)">+</button>
-               </div>
-               <input type="hidden" id="coffee_mini" value="0">
-            </div>
-            <div class="card">
-               <div class="info">
-                  <div class="name-coffee">Coffee Jelly <span class="product-qty-price">(300ml)</span></div>
-                  <div class="name">₹199</div>
-               </div>
-               <button type="button" class="add-btn" onclick="addItem('coffee_jelly', this)">ADD</button>
-               <div class="counter" id="coffee_jelly_counter">
-                  <button type="button" onclick="changeQty('coffee_jelly', -1)">-</button>
-                  <span id="coffee_jelly_display">1</span>
-                  <button type="button" onclick="changeQty('coffee_jelly', 1)">+</button>
-               </div>
-               <input type="hidden" id="coffee_jelly" value="0">
-            </div>
-            <!-- CUSTOMER DETAILS -->
-            <div class="form-section">
-               <h3>Customer Details</h3>
-               <input type="text" id="customer_name" placeholder="Name *" required>
-               <input type="tel" id="phone" placeholder="Mobile number *" required>
-               <input type="text" id="address" placeholder="Delivery address *" required>
-               <!-- <span class="product-qty-price">Please provide full and accurate address to ensure proper and timely delivery.</span> -->
-               <select id="timeslot" required>
-                  <option value="">Select delivery slot *</option>
-                  <option>11 AM - 1 PM</option>
-                  <option>3 PM - 5 PM</option>
-                  <option>7 PM - 9 PM</option>
-               </select>
-               <input type="email" id="email" placeholder="Email (optional)">
-               <input type="text" id="note" placeholder="Additional note (optional)">
-               <button type="submit" class="submit" id="submitBtn" disabled>Place Order</button>
-            </div>
-         </form>
-      </div>
-      <script>
-         const scriptURL = "https://script.google.com/macros/s/AKfycbyEva96_JVfbMu869rEBxGqm5gEfGk4L1W4kX5ZJa_fGano-wLQKPmQiKKlF4MbNggk/exec";
-         
-         function addItem(id, btn) {
-           document.getElementById(id).value = 1;
-           document.getElementById(id + "_display").innerText = 1;
-         
-           document.getElementById(id + "_counter").style.display = "flex";
-           btn.style.display = "none";
-         
-           updateCart();
-         }
-         
-         function changeQty(id, delta) {
-           let input = document.getElementById(id);
-           let val = Math.max(0, Math.min(5, parseInt(input.value) + delta));
-         
-           input.value = val;
-           document.getElementById(id + "_display").innerText = val;
-         
-           if (val === 0) {
-             document.getElementById(id + "_counter").style.display = "none";
-             document.querySelector(`[onclick="addItem('${id}', this)"]`).style.display = "block";
-           }
-         
-           updateCart();
-         }
-         
-         function updateCart() {
-           const ids = ["mango_grande","mango_mini","coffee_grande","coffee_mini","coffee_jelly"];
-         
-           let total = ids.reduce((sum, id) =>
-             sum + parseInt(document.getElementById(id).value), 0
-           );
-         
-           const bar = document.getElementById("cartBar");
-         
-           if (total > 0) {
-             bar.style.display = "block";
-             bar.innerText = "🛒 " + total;
-           } else {
-             bar.style.display = "none";
-           }
-         
-           document.getElementById("submitBtn").disabled = total === 0;
-         }
-         
-         // phone restriction
-         document.getElementById("phone").addEventListener("input", function() {
-           this.value = this.value.replace(/[^0-9]/g, "");
-         });
-         
-         document.getElementById("orderForm").addEventListener("submit", function(e) {
-           e.preventDefault();
-         
-         const form = document.getElementById("orderForm");
-         Array.from(form.elements).forEach(element => element.disabled = true);
-         
-           const ids = ["mango_grande","mango_mini","coffee_grande","coffee_mini","coffee_jelly"];
-         
-           const products = ids.map(id => ({
-             name: id,
-             qty: +document.getElementById(id).value
-           })).filter(p => p.qty > 0);
-         
-           fetch(scriptURL, {
-             method: "POST",
-             body: JSON.stringify({
-               name: customer_name.value,
-               phone: phone.value,
-               address: address.value,
-               timeslot: timeslot.value,
-         email: email.value,
-         note: note.value,
-               products
-             })
-           })
-           .then(res => res.json())
-           .then(res => {
-             alert("Order placed! ID: " + res.orderID);
-             location.reload();
-           });
-         });
-      </script>
-   </body>
+      <p>Maraming salamat po!</p>
+      <p>Order placed successfully.</p>
+      <p>We will contact you via WhatsApp as soon as possible.</p>
+      <p id="orderNumber"></p>
+      <p>Love,<br>Luna's</p>
+    </div>
+    <script>
+      let isSubmitting = false;
+      const scriptURL = "https://script.google.com/macros/s/AKfycbyEva96_JVfbMu869rEBxGqm5gEfGk4L1W4kX5ZJa_fGano-wLQKPmQiKKlF4MbNggk/exec";
+
+      function addItem(id, btn) {
+        document.getElementById(id).value = 1;
+        document.getElementById(id + "_display").innerText = 1;
+        document.getElementById(id + "_counter").style.display = "flex";
+        btn.style.display = "none";
+        updateCart();
+      }
+
+      function changeQty(id, delta) {
+        let input = document.getElementById(id);
+        let val = Math.max(0, Math.min(5, parseInt(input.value) + delta));
+        input.value = val;
+        document.getElementById(id + "_display").innerText = val;
+        if (val === 0) {
+          document.getElementById(id + "_counter").style.display = "none";
+          document.querySelector(`[onclick="addItem('${id}', this)"]`).style.display = "block";
+        }
+        updateCart();
+      }
+
+      function updateCart() {
+        const ids = ["mango_grande", "mango_mini", "coffee_grande", "coffee_mini", "coffee_jelly"];
+        let total = ids.reduce((sum, id) =>
+          sum + parseInt(document.getElementById(id).value), 0
+        );
+        const bar = document.getElementById("cartBar");
+        if (total > 0) {
+          bar.style.display = "block";
+          bar.innerText = "🛒 " + total;
+        } else {
+          bar.style.display = "none";
+        }
+        document.getElementById("submitBtn").disabled = total === 0;
+      }
+
+      /* PREVENT BACK NAVIGATION DURING SUBMIT */
+      window.addEventListener("popstate", function() {
+        if (isSubmitting) {
+          history.pushState(null, null, location.href);
+        }
+      });
+
+      /* keep history locked */
+      history.pushState(null, null, location.href);
+      window.addEventListener("beforeunload", function(e) {
+        if (isSubmitting) {
+          e.preventDefault();
+          e.returnValue = "";
+        }
+      });
+
+      // phone restriction
+      document.getElementById("phone").addEventListener("input", function() {
+        this.value = this.value.replace(/[^0-9]/g, "");
+      });
+
+	  /* NETWORK TIMEOUT PROTECTION */
+	  function fetchWithTimeout(resource, options = {}, timeout = 120000) {
+		const controller = new AbortController();
+		const id = setTimeout(() => controller.abort(), timeout);
+		return fetch(resource, {
+		  ...options,
+		  signal: controller.signal
+		}).finally(() => clearTimeout(id));
+	  }
+
+      document.getElementById("orderForm").addEventListener("submit", function(e) {
+        e.preventDefault();
+
+        document.getElementById("loadingOverlay").style.display = "flex";
+
+        isSubmitting = true;
+
+        const form = document.getElementById("orderForm");
+        Array.from(form.elements).forEach(element => element.disabled = true);
+
+        const ids = ["mango_grande", "mango_mini", "coffee_grande", "coffee_mini", "coffee_jelly"];
+
+        const products = ids.map(id => ({
+          name: id,
+          qty: +document.getElementById(id).value
+        })).filter(p => p.qty > 0);
+
+        fetchWithTimeout(scriptURL, {
+            method: "POST",
+            body: JSON.stringify({
+              name: customer_name.value,
+              phone: phone.value,
+              address: address.value,
+              timeslot: timeslot.value,
+              email: email.value,
+              note: note.value,
+              products
+            })
+          })
+          .then(res => res.json())
+          .then(res => {
+            isSubmitting = false;
+            document.getElementById("loadingOverlay").style.display = "none";
+            document.getElementById("orderNumber").innerText = "Your order number is " + res.orderID;
+            document.getElementById("successOverlay").style.display = "flex";
+          })
+          .catch(() => {
+            isSubmitting = false;
+            document.getElementById("loadingOverlay").style.display = "none";
+            if (error.name === "AbortError") {
+              alert("Network is slow. Please check connection and try again.");
+            } else {
+              alert("Unable to place order. Please try again.");
+            }
+          });
+      });
+    </script>
+  </body>
+
 </html>
