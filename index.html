@@ -305,9 +305,9 @@
         }
       }
 
-      #successOverlay p {
-        margin-top: 20px;
-        font-size: 18px;
+      .success-message {
+        margin-top: 0px;
+        font-size: 14px;
         font-weight: bold;
         color: #28a745;
       }
@@ -328,7 +328,7 @@
         color: red;
         margin-left: 3px;
         display: block;
-        font-weight: 600;
+        font-weight: 400;
         font-size: 14px;
         margin-top: 8px;
       }
@@ -361,7 +361,7 @@
           <div class="counter" id="mango_grande_counter">
             <button type="button" onclick="changeQty('mango_grande', -1)">-</button>
             <span id="mango_grande_display">1</span>
-            <button type="button" onclick="changeQty('mango_grande', 1)">+</button>
+            <button type="button" id="mango_grande_plus" onclick="changeQty('mango_grande', 1)">+</button>
           </div>
           <input type="hidden" id="mango_grande" value="0">
         </div>
@@ -374,7 +374,7 @@
           <div class="counter" id="mango_mini_counter">
             <button type="button" onclick="changeQty('mango_mini', -1)">-</button>
             <span id="mango_mini_display">1</span>
-            <button type="button" onclick="changeQty('mango_mini', 1)">+</button>
+            <button type="button" id="mango_mini_plus"  onclick="changeQty('mango_mini', 1)">+</button>
           </div>
           <input type="hidden" id="mango_mini" value="0">
         </div>
@@ -387,7 +387,7 @@
           <div class="counter" id="coffee_grande_counter">
             <button type="button" onclick="changeQty('coffee_grande', -1)">-</button>
             <span id="coffee_grande_display">1</span>
-            <button type="button" onclick="changeQty('coffee_grande', 1)">+</button>
+            <button type="button" id="coffee_grande_plus" onclick="changeQty('coffee_grande', 1)">+</button>
           </div>
           <input type="hidden" id="coffee_grande" value="0">
         </div>
@@ -400,7 +400,7 @@
           <div class="counter" id="coffee_mini_counter">
             <button type="button" onclick="changeQty('coffee_mini', -1)">-</button>
             <span id="coffee_mini_display">1</span>
-            <button type="button" onclick="changeQty('coffee_mini', 1)">+</button>
+            <button type="button" id="coffee_mini_plus" onclick="changeQty('coffee_mini', 1)">+</button>
           </div>
           <input type="hidden" id="coffee_mini" value="0">
         </div>
@@ -413,7 +413,7 @@
           <div class="counter" id="coffee_jelly_counter">
             <button type="button" onclick="changeQty('coffee_jelly', -1)">-</button>
             <span id="coffee_jelly_display">1</span>
-            <button type="button" onclick="changeQty('coffee_jelly', 1)">+</button>
+            <button type="button" id="coffee_jelly_plus" onclick="changeQty('coffee_jelly', 1)">+</button>
           </div>
           <input type="hidden" id="coffee_jelly" value="0">
         </div>
@@ -443,7 +443,7 @@
             <option>7 PM - 9 PM</option>
           </select>
           <label>Email</label>
-          <input type="email" id="email">
+          <input type="email" id="email" pattern="^[^\s@]+@[^\s@]+\.[^\s@]+$" title="Please enter a valid email (example: name@gmail.com)">
           <label>Additional Note</label>
           <input type="text" id="note">
           <button type="submit" class="submit" id="submitBtn" disabled>Place Order</button>
@@ -463,11 +463,14 @@
           <div class="icon-fix"></div>
         </div>
       </div>
-      <p>Maraming salamat po!</p>
-      <p>Order placed successfully.</p>
-      <p>We will contact you via WhatsApp as soon as possible.</p>
-      <p id="orderNumber"></p>
-      <p>Love,<br>Luna's</p>
+      <span class="success-message">Maraming salamat po!</span>
+	  <br>
+      <span class="success-message">Order placed successfully.</span>
+	  <span class="success-message" id="orderNumber"></span>
+	  <span class="success-message">We will contact you via WhatsApp as soon as possible.</span>
+	  <br>
+      <span class="success-message">Love,</span>
+	  <span class="success-message">Luna's</span>
     </div>
     <script>
       let isSubmitting = false;
@@ -478,14 +481,34 @@
         document.getElementById(id + "_display").innerText = 1;
         document.getElementById(id + "_counter").style.display = "flex";
         btn.style.display = "none";
+
+		const plusBtn = document.getElementById(id + "_plus");
+		plusBtn.disabled = false;
+		plusBtn.style.opacity = "1";
+		plusBtn.style.cursor = "pointer";
+
         updateCart();
       }
 
       function changeQty(id, delta) {
         let input = document.getElementById(id);
         let val = Math.max(0, Math.min(5, parseInt(input.value) + delta));
+
         input.value = val;
         document.getElementById(id + "_display").innerText = val;
+
+		const plusBtn = document.getElementById(id + "_plus");
+		/* DISABLE + BUTTON AT MAX */
+		if (val >= 5) {
+			plusBtn.disabled = true;
+			plusBtn.style.opacity = "0.5";
+			plusBtn.style.cursor = "not-allowed";
+		} else {
+			plusBtn.disabled = false;
+			plusBtn.style.opacity = "1";
+			plusBtn.style.cursor = "pointer";
+		}
+
         if (val === 0) {
           document.getElementById(id + "_counter").style.display = "none";
           document.querySelector(`[onclick="addItem('${id}', this)"]`).style.display = "block";
@@ -572,7 +595,7 @@
           .then(res => {
             isSubmitting = false;
             document.getElementById("loadingOverlay").style.display = "none";
-            document.getElementById("orderNumber").innerText = "Your order number is " + res.orderID;
+            document.getElementById("orderNumber").innerText = "Order number: " + res.orderID;
             document.getElementById("successOverlay").style.display = "flex";
           })
           .catch(() => {
