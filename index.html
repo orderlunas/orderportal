@@ -692,12 +692,12 @@
     <div id="cartModal" class="cart-modal" onclick="outsideModalClick(event)">
       <div class="cart-modal-content">
 
-        <h3>Your Cart</h3>
+        <h3>🛒 Your Cart</h3>
 
         <table id="cartTable">
           <thead>
             <tr>
-              <th>Product</th>
+              <th>&nbsp;&nbsp;&nbsp;&nbsp;Product</th>
               <th>Qty</th>
             </tr>
           </thead>
@@ -861,8 +861,8 @@
             hasItems = true;
             const row = `
         <tr>
-          <td>${products[id]}</td>
-          <td>${qty}</td>
+          <td>&nbsp;&nbsp;&nbsp;&nbsp;${products[id]}</td>
+          <td>&nbsp;&nbsp;${qty}</td>
         </tr>
       `;
             tbody.insertAdjacentHTML("beforeend", row);
