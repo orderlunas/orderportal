@@ -419,7 +419,7 @@
       <img src="./lunaslogo.jpg" class="logo">
     </div>
     <p class="subtitle">Mabuhay! Welcome sa Luna's</p>
-    <div class="floating-cart" id="cartBar">🛒 0</div>
+    <div class="floating-cart" id="cartBar">Selected: 0 item(s)</div>
     <div class="message-section">
       <p>Every item is lovingly handmade in limited batches to preserve its natural freshness and ensure premium quality, free from artificial preservatives. After receiving your order, we will contact you via WhatsApp or email with availability and payment details to confirm the order.</p>
       <p>Delivery is FREE for the <b>1st Order</b> in our coverage area (<b>Kalyani Nagar</b>, <b>Koregaon Park</b>, <b>Viman Nagar</b> and <b>Yerwada</b>). Delivery fee of <b>₹35</b> is applicable thereafter.</p>
@@ -677,7 +677,7 @@
         const bar = document.getElementById("cartBar");
         if (total > 0) {
           bar.style.display = "block";
-          bar.innerText = "🛒 " + total;
+          bar.innerText = "Selected: " + total + " item(s)";
         } else {
           bar.style.display = "none";
         }
